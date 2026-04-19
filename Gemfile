@@ -16,7 +16,12 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 #
 # Happy Bridgetowning!
 
-gem "bridgetown", "~> 1.0.0"
+gem "bridgetown", "1.1.0"
 gem "puma", "~> 5.6"
-
 gem "bridgetown-view-component", "~> 1.0", :group => :bridgetown_plugins
+
+# activesupport expects logger to be loaded already by its dependency of concurrent-ruby,
+# but concurrent-ruby 1.3.5 removed logger dependency,
+# so let's go back to 1.3.4 which still loads up logger.
+# This might not be needed in newer Ruby versions that already require logger.
+gem "concurrent-ruby", "1.3.4"
